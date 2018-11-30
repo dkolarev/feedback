@@ -82,7 +82,6 @@ export class FeedbackDialogComponent implements AfterViewInit {
     this.addCanvasListeners();
     this.el.nativeElement.appendChild(this.drawCanvas);
     this.feedbackService.hideBackDrop();
-    console.log('expand the board');
   }
 
   @HostListener('document:keydown.escape', ['$event'])

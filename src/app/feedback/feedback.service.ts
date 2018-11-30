@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import html2canvas from 'html2canvas';
+import * as html2canvas from 'html2canvas';
 import {Subject, Observable} from 'rxjs';
 import {Feedback} from './entity/feedback'; // import Observable to solve build issue
 
@@ -26,8 +26,7 @@ export class FeedbackService {
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
       x: document.documentElement.scrollLeft,
-      y: document.documentElement.scrollTop,
-      allowTaint : true
+      y: document.documentElement.scrollTop
     }).then(bodyCanvas => {
       this.screenshotCanvasSource.next(bodyCanvas);
     });
