@@ -1,4 +1,5 @@
-import {fromEvent as observableFromEvent} from 'rxjs';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/fromEvent';
 
 import {takeUntil, finalize, map, mergeMap} from 'rxjs/operators';
 import {Component, ElementRef, Input, Output, EventEmitter, AfterViewInit, ViewChild, OnChanges} from '@angular/core';
@@ -54,9 +55,9 @@ export class FeedbackToolbarComponent implements AfterViewInit, OnChanges {
   }
 
   public addDragListenerOnMoveBtn() {
-    const mouseUp = observableFromEvent(this.toggleMoveBtn.nativeElement, 'mouseup');
-    const mouseMove = observableFromEvent(document.documentElement, 'mousemove');
-    const mouseDown = observableFromEvent(this.toggleMoveBtn.nativeElement, 'mousedown');
+    const mouseUp = Observable.fromEvent<Event>(this.toggleMoveBtn.nativeElement, 'mouseup');
+    const mouseMove = Observable.fromEvent<Event>(document.documentElement, 'mousemove');
+    const mouseDown = Observable.fromEvent<Event>(this.toggleMoveBtn.nativeElement, 'mousedown');
     const mouseDrag = mouseDown.pipe(mergeMap((md: MouseEvent) => {
       this.feedbackService.setIsDraggingToolbar(true);
       const startX = md.offsetX;

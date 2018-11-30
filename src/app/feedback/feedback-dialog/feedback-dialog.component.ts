@@ -1,4 +1,5 @@
-import {from, fromEvent as observableFromEvent, Observable, Subscription} from 'rxjs';
+import { Observable, Subscription} from 'rxjs';
+import 'rxjs/add/observable/fromEvent';
 
 import {takeUntil, finalize, map, mergeMap, timeout, skipWhile, filter, scan, first} from 'rxjs/operators';
 import {Component, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef, HostListener, Renderer2} from '@angular/core';
@@ -169,10 +170,10 @@ export class FeedbackDialogComponent implements AfterViewInit {
   }
 
   private addCanvasListeners(): void {
-    const mouseUp = observableFromEvent(document.documentElement, 'mouseup'),
-          mouseMove = observableFromEvent(document.documentElement, 'mousemove'),
-          mouseDown = observableFromEvent(document.documentElement, 'mousedown'),
-          scroll = observableFromEvent(window, 'scroll');
+    const mouseUp = Observable.fromEvent<Event>(document.documentElement, 'mouseup'),
+          mouseMove = Observable.fromEvent<Event>(document.documentElement, 'mousemove'),
+          mouseDown = Observable.fromEvent<Event>(document.documentElement, 'mousedown'),
+          scroll = Observable.fromEvent<Event>(window, 'scroll');
 
     this.manuallyDrawRect(mouseDown, mouseMove, mouseUp);
     this.autoDrawRect(mouseMove);
